@@ -15,10 +15,15 @@
               
 #             new_user = User.objects.create_user(
 #                 username=form_data['username'],
-#                 password=form_data['password']
+#                 email=form_data['email'],
+#                 password=form_data['password'],
+#                 address=form_data['address'],
+#                 can_haul_away=form_data['can_haul_away']
+
+
 #             )
             
-#             user = authenticate(request, username=form_data['username'], password=form_data['password'])
+#             user = authenticate(request, username=form_data['username'], password=form_data['password'],)
 #             if user is not None:
 #                 login(request, user)
 #                 return redirect(reverse('curbalertapp:home'))

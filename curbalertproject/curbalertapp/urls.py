@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import *
+from .views import * 
 
 app_name = "curbalertapp"
 
@@ -16,4 +16,4 @@ urlpatterns = [
     # path('books/', book_list, name='books'),
     # path('librarians/', list_librarians, name='librarians'),
     # path('libraries/', list_libraries, name='libraries'),
-        # path('accounts/register', register, name='register'),
+    # path('accounts/register', register, name='register'),
