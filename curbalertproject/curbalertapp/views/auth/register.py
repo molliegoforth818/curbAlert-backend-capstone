@@ -34,11 +34,7 @@ def register(request):
             messages.error(request, f'{type(e)}: {e}')
           
                 
-
-    # libraries = Library.objects.all()
     template = 'registration/register.html'
-    # context = {
-    #     'libraries': libraries
-    # }
+    context = {}
 
-    return render(request, template)
+    return render(request, template,context)
