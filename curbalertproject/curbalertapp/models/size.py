@@ -1,23 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-class Book(models.Model):
-
-    title = models.CharField(max_length=50)
-    isbn = models.CharField(max_length=50)
-    author = models.CharField(max_length=50)
-    year_published = models.IntegerField()
-    publisher = models.CharField(max_length=50)
-    library = models.ForeignKey(Library, on_delete=models.CASCADE)
-    librarian = models.ForeignKey(Librarian, on_delete=models.CASCADE)
-
+class Size(models.Model):
+    
+    title = models.CharField(null = False, max_length = 55)
+    
     class Meta:
-        verbose_name = ("book")
-        verbose_name_plural = ("books")
-
+        verbose_name = ("Size")
+        verbose_name_plural = ("Sizes")        
+        
     def __str__(self):
-        return self.title
-
+        return f"Name: {self.name}"
+    
     def get_absolute_url(self):
-        return reverse("book_detail", kwargs={"pk": self.pk})
+        # return reverse("ProductType_detail", kwargs={"pk": self.pk})
