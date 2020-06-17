@@ -1,21 +1,21 @@
-{% comment %} {% extends 'shared/base.html' %}
+{% comment %} {% extends 'shared/base.html' %} {% endcomment %}
 {% load static %}
-
+{% comment %} 
 {% block css %}
     <link rel="stylesheet" href="{% static 'styles/books.css' %}" />
-{% endblock %}
+{% endblock %} {% endcomment %}
 
 {% block content %}
-    {% if messages %}
+    {% comment %} {% if messages %}
         <ul>
             {% for message in messages %}
             <li>{{ message }}</li>
             {% endfor %}
         </ul>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
-    <form action="{% url 'libraryapp:register' %}" method="post">
-      {% csrf_token %}
+    <form action="{% url 'curbalertapp:register' %}" method="post">
+      {% csrf_token %} 
       <fieldset>
           <label for="username">Username: </label>
           <input id="username" type="text" name="username">
@@ -24,19 +24,36 @@
           <label for="password">Password: </label>
           <input id="password" type="password" name="password">
       </fieldset>
-      <fieldset>
+            <fieldset>
           <label for="password_confirmation">Password Confirmation: </label>
           <input id="password_confirmation" type="password" name="password_confirmation">
       </fieldset>
       <fieldset>
-          <label for="location">Library: </label>
-          <select id="location" type="text" name="location">
-                {% for library in libraries %}
-                    <option value="{{ library.id }}">{{ library.name }}</option>
-                {% endfor %}
+          <label for="email">Email: </label>
+          <input id="email" type="email" name="email">
+      </fieldset>
+      <fieldset>
+          <label for="address">Address: </label>
+          <input id="address" type="address" name="address">
+      </fieldset>
+      <fieldset>
+          <label for="can_haul_away">Are you available to haul away donations? </label>
+          <select id="can_haul_away" name="can_haul_away">
+          <option value=true>Yes</option>
+          <option value=false>No</option>
           </select>
       </fieldset>
-
+      <fieldset>
+          <label for="haul_distance">How far are you willing to travel to haul away donations? </label>
+          <select id="haul_distance" name="haul_distance">
+          <option value="one">1 miles</option>
+          <option value="five">5 miles</option>
+          <option value="five">10 miles</option>
+          <option value="five">20+ miles</option>
+          </select>
+      </fieldset>
+        <fieldset>
       <input type="submit" value="Submit" />
+      </fieldset>
     </form>
-{% endblock %}  {% endcomment %}
+{% endblock %} 

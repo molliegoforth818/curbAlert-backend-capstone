@@ -1,5 +1,6 @@
 from django.urls import path, include
 from .views import * 
+from .views import register
 
 app_name = "curbalertapp"
 
@@ -7,6 +8,8 @@ urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', logout_user, name='logout'),
+    path('accounts/register', register, name='register')
+
 
 ]
 
@@ -16,4 +19,3 @@ urlpatterns = [
     # path('books/', book_list, name='books'),
     # path('librarians/', list_librarians, name='librarians'),
     # path('libraries/', list_libraries, name='libraries'),
-    # path('accounts/register', register, name='register'),
