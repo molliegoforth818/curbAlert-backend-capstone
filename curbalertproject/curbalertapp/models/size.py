@@ -14,5 +14,5 @@ class Size(models.Model):
     def __str__(self):
         return f"Name: {self.name}"
     
-    # def get_absolute_url(self):
-        # return reverse("ProductType_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("Size_detail", kwargs={"pk": self.pk})

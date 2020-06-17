@@ -4,7 +4,7 @@ from django.urls import reverse
 from .alerter import Alerter
 from .size import Size
 
-class Donations(models.Model):
+class Donation(models.Model):
     
     alerter = models.ForeignKey(Alerter, null = False)
     size = models.ForeignKey(Size, on_delete = models.CASCADE )
@@ -22,5 +22,5 @@ class Donations(models.Model):
     def __str__(self):
         return f"Title: {self.title}"
     
-    # def get_absolute_url(self):
-    #     return reverse("Product_detail", kwargs={"pk": self.pk})
+    def get_absolute_url(self):
+        return reverse("Donation_detail", kwargs={"pk": self.pk})
