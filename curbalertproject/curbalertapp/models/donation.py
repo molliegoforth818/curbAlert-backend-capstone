@@ -6,13 +6,13 @@ from .size import Size
 
 class Donation(models.Model):
     
-    alerter = models.ForeignKey(Alerter, null = False)
+    alerter = models.ForeignKey(Alerter, null = False, on_delete = models.CASCADE )
     size = models.ForeignKey(Size, on_delete = models.CASCADE )
     description = models.CharField(null = False, max_length = 255 )
     created_at = models.DateTimeField(auto_now_add= True)
     expires_on = models.DateTimeField(auto_now_add= True)
-    needs_haul_away = models.Boolean(null = False)
-    picked_up = models.Boolean(null=False)
+    needs_haul_away = models.BooleanField(null = False)
+    picked_up = models.BooleanField(null=False)
     # image = models.ImageField(upload_to='ecommerceapi_images', null=True) *stretch*
     
     class Meta:

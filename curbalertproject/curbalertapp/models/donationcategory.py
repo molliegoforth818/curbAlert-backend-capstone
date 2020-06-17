@@ -9,8 +9,7 @@ class DonationCategory(models.Model):
     
     donation = models.ForeignKey(Donation, on_delete = models.CASCADE )
     category = models.ForeignKey(Category, on_delete = models.CASCADE )
-
-    
+   
     class Meta:
         verbose_name = ("Category")
         verbose_name_plural = ("Categories")        

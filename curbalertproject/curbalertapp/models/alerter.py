@@ -7,8 +7,8 @@ class Alerter(models.Model):
     address = models.CharField(null = False, max_length = 50) 
     longitude = models.CharField(null = False, max_length = 20)
     latitude = models.CharField(null = False, max_length = 20)
-    can_haul_away = models.Boolean(null=False)
-    haul_distance = models.Boolean(null=False)
+    can_haul_away = models.BooleanField(null=False)
+    haul_distance = models.BooleanField(null=False)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
     
     class Meta:
