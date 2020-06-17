@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-class Size(models.Model):
+class HaulDistance(models.Model):
     
-    title = models.CharField(null = False, max_length = 55)
+    miles = models.IntegerField(null = True)
     
     class Meta:
-        verbose_name = ("Size")
-        verbose_name_plural = ("Sizes")        
+        verbose_name = ("Haul Distance")
+        verbose_name_plural = ("Haul Distances")        
         
     def __str__(self):
         return f"Name: {self.name}"

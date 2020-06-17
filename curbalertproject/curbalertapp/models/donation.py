@@ -22,5 +22,5 @@ class Donations(models.Model):
     def __str__(self):
         return f"Title: {self.title}"
     
-    def get_absolute_url(self):
-        return reverse("Product_detail", kwargs={"pk": self.pk})
+    # def get_absolute_url(self):
+    #     return reverse("Product_detail", kwargs={"pk": self.pk})

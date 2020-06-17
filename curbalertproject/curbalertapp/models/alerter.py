@@ -18,6 +18,6 @@ class Alerter(models.Model):
     def __str__(self):
         return f"User ID: {self.user}"
     
-    def get_absolute_url(self):
+    # def get_absolute_url(self):
         # return reverse("customer_detail", kwargs={"pk": self.pk})
         

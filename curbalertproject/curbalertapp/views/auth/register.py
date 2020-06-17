@@ -15,14 +15,11 @@ def register(request):
               
             new_user = User.objects.create_user(
                 username=form_data['username'],
-                email=form_data['email'],
-                password=form_data['password'],
-                address=form_data['address'],
-                can_haul_away=form_data['can_haul_away'],
-                haul_distance=form_data['haul_distance']
+                password=form_data['password']
+                
             )
             
-            user = authenticate(request, username=form_data['username'], email=form_data['email'], 
+            alerter = authenticate(request, username=form_data['username'], email=form_data['email'], 
             password=form_data['password'], address=form_data['address'],can_haul_away=form_data['can_haul_away'],
             haul_distance=form_data['haul_distance']
 
@@ -38,3 +35,8 @@ def register(request):
     context = {}
 
     return render(request, template,context)
+
+#   email=form_data['email']
+#                     address=form_data['address'],
+#                 can_haul_away=form_data['can_haul_away'],
+#                 haul_distance=form_data['haul_distance']

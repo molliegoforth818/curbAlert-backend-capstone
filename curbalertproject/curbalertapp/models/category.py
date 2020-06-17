@@ -14,5 +14,5 @@ class Category(models.Model):
     def __str__(self):
         return f"Name: {self.name}"
     
-    def get_absolute_url(self):
+    # def get_absolute_url(self):
         # return reverse("ProductType_detail", kwargs={"pk": self.pk})
