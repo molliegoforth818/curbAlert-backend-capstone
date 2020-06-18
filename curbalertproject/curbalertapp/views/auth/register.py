@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+
   
   
 def register(request):
@@ -18,10 +19,13 @@ def register(request):
                 password=form_data['password']
                 
             )
+            new_user.alerter.address=form_data['address']
+            new_user.alerter.email=form_data['email']
+            new_user.alerter.can_haul_away=False
+            new_user.alerter.haul_distance=['haul_distance']
+            new_user.alerter.save()
             
-            alerter = authenticate(request, username=form_data['username'], email=form_data['email'], 
-            password=form_data['password'], address=form_data['address'],can_haul_away=form_data['can_haul_away'],
-            haul_distance=form_data['haul_distance']
+            user = authenticate(request, username=form_data['username'], password=form_data['password']
 
 )
             if user is not None:
@@ -36,7 +40,3 @@ def register(request):
 
     return render(request, template,context)
 
-#   email=form_data['email']
-#                     address=form_data['address'],
-#                 can_haul_away=form_data['can_haul_away'],
-#                 haul_distance=form_data['haul_distance']
