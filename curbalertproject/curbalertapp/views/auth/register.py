@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from curbalertapp.models import Alerter
   
   
 def register(request):
@@ -12,19 +13,19 @@ def register(request):
         try:
             if form_data['password'] != form_data['password_confirmation']:
                 raise ValidationError("Password and password confirmation do not match.")
-              
+            alerter=Alerter()  
             new_user = User.objects.create_user(
                 username=form_data['username'],
-                email=form_data['email'],
-                password=form_data['password'],
-                address=form_data['address'],
-                can_haul_away=form_data['can_haul_away'],
-                haul_distance=form_data['haul_distance']
+                password=form_data['password']
             )
             
-            user = authenticate(request, username=form_data['username'], email=form_data['email'], 
-            password=form_data['password'], address=form_data['address'],can_haul_away=form_data['can_haul_away'],
-            haul_distance=form_data['haul_distance']
+            alerter.address=form_data['address']
+            alerter.email=form_data['email']
+            alerter.can_haul_away=False
+            alerter.user=new_user
+            alerter.save()
+            
+            user = authenticate(request, username=form_data['username'], password=form_data['password']
 
 )
             if user is not None:
@@ -38,3 +39,4 @@ def register(request):
     context = {}
 
     return render(request, template,context)
+

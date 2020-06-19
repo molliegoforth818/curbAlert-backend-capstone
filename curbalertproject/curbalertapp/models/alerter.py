@@ -1,23 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+# from .hauldistance import HaulDistance
+
 
 class Alerter(models.Model):
     
-    address = models.CharField(null = False, max_length = 50) 
-    longitude = models.CharField(null = False, max_length = 20)
-    latitude = models.CharField(null = False, max_length = 20)
-    can_haul_away = models.Boolean(null=False)
-    haul_distance = models.Boolean(null=False)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    address = models.CharField( max_length = 50) 
+    longitude = models.CharField( max_length = 20)
+    latitude = models.CharField( max_length = 20)
+    can_haul_away = models.BooleanField(null=True)
+    user = models.OneToOneField(User, related_name='alerter', on_delete=models.CASCADE)
     
-    class Meta:
-        verbose_name = ("Alerter")
-        verbose_name_plural = ("Alerters")        
-        
-    def __str__(self):
-        return f"User ID: {self.user}"
-    
-    def get_absolute_url(self):
-        # return reverse("customer_detail", kwargs={"pk": self.pk})
+@receiver(post_save, sender=User)
+def create_alerter(sender, instance, created, **kwargs):
+    if created:
+        Alerter.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_alerter(sender, instance, **kwargs):
+    instance.alerter.save()
         

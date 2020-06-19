@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <title>Curb Alert</title>
-</head>
+{% extends 'shared/base.html' %}
 
-<body>
+{% block content %}
 
-    <h1>Welcome to Curb Alert!</h1>
-    <a href="{% url 'curbalertapp:login' %}">Login</a>
-    <a href="{% url 'curbalertapp:register' %}">Register</a>
+    <h1>Welcome to Curb Alert 🚨</h1>
 
-
-</body>
-
-</html>
+{% endblock %}
