@@ -1,0 +1,49 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Send out a Curb Alert</h1>
+
+
+    {% if donation.id is not None %}
+        <form action="{% url 'curbalertapp:book' donation.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <form action="{% url 'curbalertapp:donation' %}" method="post">
+    {% endif %}
+      {% csrf_token %}
+      <fieldset>
+          <label for="title">Size of Donation: </label>
+           <select id="donation_size" name="donation_size"value="{{donation.size}}">
+          <option value=small>Small</option>
+          <option value=medium>Medium</option>
+          <option value=large>Large</option>
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="donation_description">Donation Description: </label>
+          <input id="donation_description" type="text" name="donation_description"value="{{donation.descriptiong}}">
+      </fieldset>
+      <fieldset>
+          <label for="expires_on">When would you like your Alert to Expire? </label>
+          <input id="expires_on" type="datetime" name="expires_on"value="{{book.publisher}}">
+      </fieldset>
+      <fieldset>
+          <label for="needs_haul_away">Does this need to be picked up? </label>
+          <input id="isbn" type="text" name="isbn"value="{{book.publisher}}" >
+      </fieldset>
+      <fieldset>
+          <label for="publisher">Publisher: </label>
+          <input id="publisher" type="text" name="publisher"  value="{{book.publisher}}">
+      </fieldset>
+      <fieldset>
+          <label for="location">Library: </label>
+          <select id="location" type="text" name="location">
+                {% for library in all_libraries %}
+                    <option {% if library.id == book.location_id %}selected{% endif %} value="{{ library.id }}">{{ library.name }}</option>
+                {% endfor %}
+          </select>
+      </fieldset>
+
+      <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
