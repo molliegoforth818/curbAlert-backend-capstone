@@ -3,9 +3,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from django.forms import ValidationError
-from .curbalertapp.models import Alerter
-  
+from curbalertapp.models import Alerter
+from django.forms import ValidationError 
   
 def register(request):
     if request.method == 'POST':
@@ -15,19 +14,16 @@ def register(request):
             if form_data['password'] != form_data['password_confirmation']:
                 raise ValidationError("Password and password confirmation do not match.")
             
-            alerter= Alerter() 
             new_user = User.objects.create_user(
                 username=form_data['username'],
                 password=form_data['password']
             )
 
-            alerter=Alerter.objects.create_alerter(
-            address=form_data['address'],
-            email=form_data['email'],
-            can_haul_away=False,
-            user=new_user
-            )
-            alerter.save()
+            new_user.alerter.address=form_data['address'],
+            new_user.alerter.address=form_data['address'],
+            new_user.alerter.email=form_data['email'],
+            new_user.alerter.can_haul_away=False
+            new_user.alerter.save()
             
             
             user = authenticate(request, username=form_data['username'], password=form_data['password']
