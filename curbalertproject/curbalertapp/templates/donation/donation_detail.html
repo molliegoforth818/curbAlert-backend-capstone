@@ -1,0 +1,25 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <section id="donation-details">
+        <h1>Donation</h1>
+        <h2>Alerter: {{ donation.alerter.user }}</h2>
+
+        <div>Published in {{ donation.year_published }}</div>
+        <div>Publisher {{ donation.publisher }}</div>
+        <div>ISBN: {{ donation.isbn }}</div>
+        <div>Located in the {{ donation.location.name }}</div>
+        <div>Registered by {{ donation.librarian.user.first_name }} {{ donation.librarian.user.last_name }}</div>
+    </section>
+
+    <form action="{% url 'libraryapp:donation' donation.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE">
+        <button>Delete</button>
+    </form>
+
+    <form action="{% url 'libraryapp:donation_edit_form' donation.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
+{% endblock %}

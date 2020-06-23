@@ -1,0 +1,42 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Send out a Curb Alert</h1>
+
+
+    {% if donation.id is not None %}
+        <form action="{% url 'curbalertapp:donation' donation.id %}" method="post">
+          <input type="hidden" name="actual_method" value="PUT">
+    {% else %}
+        <form action="{% url 'curbalertapp:donations' %}" method="post">
+    {% endif %}
+      {% csrf_token %}
+      <fieldset>
+          <label for="title">Size of Donation: </label>
+        <select id="donation_size" name="donation_size">
+            <option value="1">Small</option>
+            <option value="2">Medium</option>
+            <option value="3">Large</option>
+        </select>
+      </fieldset>
+      <fieldset>
+          <label for="title">Category: </label>
+           <select id="donation_category" name="donation_category"value="{{donation.category.title}}">
+          <option value="housewares">Houseware</option>
+          <option value="sporting_goods">Sporting Goods</option>
+          <option value="clothes">Clothes</option>
+          <option value="furniture">Furniture</option>
+          </select>
+      </fieldset>
+      <fieldset>
+          <label for="donation_description">Donation Description: </label>
+          <input id="donation_description" type="text" name="donation_description"value="{{donation.description}}">
+      </fieldset>
+      <fieldset>
+          <label for="expires_on">When would you like your Alert to Expire? </label>
+          <input id="expires_on" type="datetime-local" name="expires_on"value="{{donation.expires_on}}">
+      </fieldset>
+
+      <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

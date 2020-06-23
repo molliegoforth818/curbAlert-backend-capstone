@@ -1,0 +1,23 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Donations</h1>
+
+    <ul>
+    {% for donation in all_donations %}
+        <li>Alerter : {{ donation.alerter.user }}</li>
+        <li>Donation Description: {{ donation.description }}</li>
+
+            <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE">
+        <button>Delete</button>
+    </form>
+
+    <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
+    {% endfor %}
+    </ul>
+{% endblock %}

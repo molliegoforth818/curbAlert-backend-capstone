@@ -4,5 +4,9 @@
 {% block content %}
 
     <h1>Welcome to Curb Alert 🚨</h1>
+       <form action="{% url 'curbalertapp:donation_form'%}" method="GET">
+        {% csrf_token %}
+        <button type="submit">Send a Curb Alert</button>
+    </form>
 
 {% endblock %}
