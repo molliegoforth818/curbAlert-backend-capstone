@@ -24,9 +24,9 @@ def donation_form(request):
 def donation_edit_form(request, donation_id):
 
     if request.method == 'GET':
-        donation = get_donations(donation_id)
+        donation = get_donations()
 
-        template = 'donations/donation_form.html'
+        template = 'donation/donation_form.html'
         context = {
             'donation': donation
         }

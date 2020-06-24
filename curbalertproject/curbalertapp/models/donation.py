@@ -1,10 +1,14 @@
+from safedelete.models import SafeDeleteModel
+from safedelete.models import HARD_DELETE_NOCASCADE
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from .alerter import Alerter
 from .size import Size
 
-class Donation(models.Model):
+class Donation(SafeDeleteModel):
+    _safedelete_policy = HARD_DELETE_NOCASCADE
+
     
     alerter = models.ForeignKey(Alerter, null = False, on_delete = models.CASCADE )
     size = models.ForeignKey(Size, on_delete = models.CASCADE )
