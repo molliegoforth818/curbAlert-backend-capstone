@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'safedelete',
+    'leaflet',
+    'six',
     'curbalertapp'
 ]
 
@@ -121,3 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LEAFLET_CONFIG= {  
+    'DEFAULT_CENTER': (36.16,-86.78),
+    'DEFAULT_ZOOM': 12,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 20,
+
+}

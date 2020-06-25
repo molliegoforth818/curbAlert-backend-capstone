@@ -1,12 +1,23 @@
-
 {% extends 'shared/base.html' %}
+{% load static %}
+{% load leaflet_tags %}
 
 {% block content %}
 
-    <h1>Welcome to Curb Alert 🚨</h1>
-       <form action="{% url 'curbalertapp:donation_form'%}" method="GET">
-        {% csrf_token %}
-        <button type="submit">Send a Curb Alert</button>
-    </form>
+<link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+
+<script src = "{% static 'scripts/map.js' %}"></script>
+
+
+
+
+<h1>Welcome to Curb Alert 🚨</h1>
+
+<form action="{% url 'curbalertapp:donation_form'%}" method="GET">
+{% csrf_token %}
+{% leaflet_map "myalertmap" callback="map_init" %} 
+{% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
+<button type="submit">Send a Curb Alert</button>
+</form>
 
 {% endblock %}

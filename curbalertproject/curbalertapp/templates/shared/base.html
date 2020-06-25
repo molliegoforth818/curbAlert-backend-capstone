@@ -1,4 +1,6 @@
 {% load static %}
+{% load leaflet_tags %}
+
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
 
     {% block css %}
+{% leaflet_css %}
     {% endblock %}
 </head>
 
@@ -27,8 +30,8 @@
     </main>
 
     {% block scripts %}
+{% leaflet_js %}
     {% endblock scripts %}
-
 </body>
 
 </html>

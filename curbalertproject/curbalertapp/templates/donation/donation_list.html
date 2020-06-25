@@ -3,11 +3,11 @@
 {% block content %}
     <h1>Donations</h1>
 
-    <ul>
+    <div>
     {% for donation in all_donations %}
-        <li>Alerter : {{ donation.alerter.user }}</li>
-        <li>Donation Description: {{ donation.description }}</li>
-
+        <a>Alerter : {{ donation.alerter.user }}</a>
+        <a>Donation Description: {{ donation.description }}</a>
+        
             <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
@@ -18,6 +18,7 @@
         {% csrf_token %}
         <button>Edit</button>
     </form>
+    {% endif %}
     {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
