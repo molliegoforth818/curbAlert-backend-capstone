@@ -26,6 +26,7 @@
           <option value="sporting_goods">Sporting Goods</option>
           <option value="clothes">Clothes</option>
           <option value="furniture">Furniture</option>
+          <option value="miscellaneous">Miscellaneous</option>
           </select>
       </fieldset>
       <fieldset>
@@ -36,7 +37,13 @@
           <label for="expires_on">When would you like your Alert to Expire? </label>
           <input id="expires_on" type="datetime-local" name="expires_on"value="{{donation.expires_on}}">
       </fieldset>
-
+      <fieldset>
+          <label for="picked_up">Has this donation been taken to a donation center? </label>
+          <select id="picked_up" name="picked_up"value="{{donation.picked_up}}">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+            </select>
+       </fieldset>     
       <input type="submit" value="Submit" />
     </form>
 {% endblock %}

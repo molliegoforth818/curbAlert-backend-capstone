@@ -12,13 +12,13 @@
         <div>Registered by {{ donation.librarian.user.first_name }} {{ donation.librarian.user.last_name }}</div>
     </section>
 
-    <form action="{% url 'libraryapp:donation' donation.id %}" method="POST">
+    <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
     </form>
 
-    <form action="{% url 'libraryapp:donation_edit_form' donation.id %}" method="GET">
+    <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
         {% csrf_token %}
         <button>Edit</button>
     </form>
