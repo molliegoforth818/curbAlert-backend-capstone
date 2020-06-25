@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'safedelete',
     'leaflet',
     'six',
+    'geocoder',
     'curbalertapp'
 ]
 
@@ -129,5 +130,4 @@ LEAFLET_CONFIG= {
     'DEFAULT_ZOOM': 12,
     'MIN_ZOOM': 1,
     'MAX_ZOOM': 20,
-
 }

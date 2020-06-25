@@ -7,18 +7,15 @@
     {% for donation in all_donations %}
         <a>Alerter : {{ donation.alerter.user }}</a>
         <a>Donation Description: {{ donation.description }}</a>
-        
             <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
         <button>Delete</button>
     </form>
-
     <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
         {% csrf_token %}
         <button>Edit</button>
     </form>
-    {% endif %}
     {% endfor %}
     </div>
 {% endblock %}
