@@ -5,17 +5,18 @@
 <html>
 
 <head>
-    {% leaflet_js %}
-    {% leaflet_css %}
     <meta charset="utf-8">
     <title>Curb Alert 🚨</title>
 
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+
     {% block css %}
+{% leaflet_css %}
     {% endblock %}
 </head>
 
 <body>
-    
+
     <nav id="site-nav">
         <ol class="navList">
             <li class="navList__route"><a href="{% url 'curbalertapp:home' %}">Home</a></li>
@@ -29,6 +30,7 @@
     </main>
 
     {% block scripts %}
+{% leaflet_js %}
     {% endblock scripts %}
 </body>
 
