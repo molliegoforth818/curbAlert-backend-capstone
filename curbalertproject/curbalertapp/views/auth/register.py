@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from curbalertapp.models import Alerter
 from django.forms import ValidationError 
-  
+import geocoder
+
 def register(request):
     if request.method == 'POST':
         form_data = request.POST
@@ -16,19 +17,20 @@ def register(request):
             
             new_user = User.objects.create_user(
                 username=form_data['username'],
-                password=form_data['password']
+                password=form_data['password'],
+                email=form_data['email']
             )
-
-            new_user.alerter.address=form_data['address'],
-            new_user.alerter.address=form_data['address'],
-            new_user.alerter.email=form_data['email'],
+            
+            get_lat_long_from_address = geocoder.osm(form_data['address']).json
+            new_user.alerter.address=form_data['address']
+            new_user.alerter.latitude = get_lat_long_from_address['lat']
+            new_user.alerter.longitude = get_lat_long_from_address['lng']
             new_user.alerter.can_haul_away=False
             new_user.alerter.save()
             
             
-            user = authenticate(request, username=form_data['username'], password=form_data['password']
-
-)
+            
+            user = authenticate(request, username=form_data['username'], password=form_data['password'])
             if user is not None:
                 login(request, user)
                 return redirect(reverse('curbalertapp:home'))
@@ -40,4 +42,13 @@ def register(request):
     context = {}
 
     return render(request, template,context)
+
+    def get_lat_long_from_address(address):
+        g = geocoder.osm('Nashville, TN' )
+        g.osm
+        return ['lat', 'lng']
+
+
+
+
 
