@@ -10,7 +10,7 @@ def home(request):
         available_donations = []
         for donation in available_donation_queryset:
             available_donations.append({
-                'id':donation.id,'description': donation.description, 'latitude': donation.alerter.latitude, 'longitude': donation.alerter.longitude
+                'id':donation.id,'description': donation.description, 'latitude': donation.alerter.latitude, 'longitude': donation.alerter.longitude, 'is_expired':donation.is_expired, 'user':donation.alerter.user.username
             })        
         template = 'home.html'
         context = {

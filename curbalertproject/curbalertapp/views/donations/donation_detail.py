@@ -2,7 +2,7 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from curbalertapp.models import Donation
+from curbalertapp.models import Donation, DonationCategory
 
 
 def get_donation(donation_id):
@@ -12,11 +12,16 @@ def get_donation(donation_id):
 @login_required
 def donation_details(request, donation_id):
     donation = get_donation(donation_id)
+    enable_edit = False
     if request.method == 'GET':
-
-        template = 'donation/donation_details.html'
+        if request.user == donation.alerter.user:
+            enable_edit = True
+        categories = DonationCategory.objects.filter(donation_id=donation.id).select_related('category').all()
+        template = 'donation/donation_detail.html'
         context = {
-            'donation': donation
+            'donation': donation,
+            'categories': categories,
+            'enable_edit': enable_edit
         }
 
         return render(request, template, context)

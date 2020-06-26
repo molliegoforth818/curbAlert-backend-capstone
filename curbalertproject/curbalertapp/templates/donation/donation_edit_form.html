@@ -1,0 +1,19 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>Edit Curb Alert</h1>
+
+
+    {% if donation.id is not None %}
+        <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="get" novalidate>
+            <input type="hidden" name="actual_method" value="PUT" >
+        <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="post" novalidate>
+            <input type="hidden" name="actual_method" value="PUT" >
+    {% else %}
+        <form action="{% url 'curbalertapp:donation_form' %}" method="post" novalidate>
+    {% endif %}
+      {% csrf_token %} 
+        {{form.as_p}}
+     <input type="submit" value="Submit"/>
+     </form> 
+     {% endblock %}

@@ -13,9 +13,15 @@ class DonationCategory(models.Model):
     class Meta:
         verbose_name = ("Category")
         verbose_name_plural = ("Categories")        
-        
+
     def __str__(self):
-        return f"Name: {self.name}"
+        return f"{self.category}"
+
+    @property
+    def category_title(self):
+        category = Category.objects.get(pk=self.category.id)
+        return category.title
+
 
     def get_absolute_url(self):
         return reverse("DonationCategory_detail", kwargs={"pk": self.pk})   

@@ -5,28 +5,30 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
-
-
+{{available_donations|json_script:'available_donations'}}
+<script id='available_donations' type='application/json'>{{available_donations}} </script>
 <script src = "{% static 'scripts/map.js' %}"></script>
 
 
 
 
 <h1>Welcome to Curb Alert 🚨</h1>
-<div>
-   {% for donation in available_donations %}
-      {% for key, value in donation.items %}
-         <div>
-            key: {{key}}, value: {{value}}
-         </div>
-      {% endfor %}
-   {% endfor %}
-</div>
 <form action="{% url 'curbalertapp:donation_form'%}" method="GET">
 {% csrf_token %}
 {% leaflet_map "myalertmap" callback="map_init" %} 
 {% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
 <button type="submit">Send a Curb Alert</button>
 </form>
-
+<div>
+Expired Alerts
+<ul>
+{% for donation in available_donations %}
+{% if donation.is_expired %}
+<li>
+ {{donation.user}}: {{donation.description}}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
 {% endblock %}

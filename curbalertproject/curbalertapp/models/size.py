@@ -12,7 +12,7 @@ class Size(models.Model):
         verbose_name_plural = ("Sizes")        
         
     def __str__(self):
-        return f"Name: {self.name}"
+        return self.title
     
     def get_absolute_url(self):
         return reverse("Size_detail", kwargs={"pk": self.pk})

@@ -12,7 +12,7 @@ class Category(models.Model):
         verbose_name_plural = ("Categories")        
         
     def __str__(self):
-        return f"Name: {self.name}"
+        return self.title
     
     def get_absolute_url(self):
         return reverse("Category_detail", kwargs={"pk": self.pk})
