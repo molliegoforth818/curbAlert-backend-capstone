@@ -13,7 +13,15 @@
 
 
 <h1>Welcome to Curb Alert 🚨</h1>
-
+<div>
+   {% for donation in available_donations %}
+      {% for key, value in donation.items %}
+         <div>
+            key: {{key}}, value: {{value}}
+         </div>
+      {% endfor %}
+   {% endfor %}
+</div>
 <form action="{% url 'curbalertapp:donation_form'%}" method="GET">
 {% csrf_token %}
 {% leaflet_map "myalertmap" callback="map_init" %} 

@@ -31,4 +31,5 @@ def donation_edit_form(request, donation_id):
             'donation': donation
         }
 
+
         return render(request, template, context)

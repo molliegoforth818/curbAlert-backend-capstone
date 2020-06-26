@@ -25,6 +25,7 @@ def donation_list(request):
             picked_up = False,
             alerter_id= request.user.id,
             size_id = form_data['donation_size']
-        )        
+        )
+                
 
         return redirect(reverse('curbalertapp:donations'))

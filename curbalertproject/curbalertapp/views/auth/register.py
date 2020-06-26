@@ -21,10 +21,10 @@ def register(request):
                 email=form_data['email']
             )
             
-            get_lat_long_from_address = geocoder.osm(form_data['address']).json
+            lat_long_from_address = geocoder.osm(form_data['address']).json
             new_user.alerter.address=form_data['address']
-            new_user.alerter.latitude = get_lat_long_from_address['lat']
-            new_user.alerter.longitude = get_lat_long_from_address['lng']
+            new_user.alerter.latitude = lat_long_from_address['lat']
+            new_user.alerter.longitude = lat_long_from_address['lng']
             new_user.alerter.can_haul_away=False
             new_user.alerter.save()
             
@@ -43,10 +43,6 @@ def register(request):
 
     return render(request, template,context)
 
-    def get_lat_long_from_address(address):
-        g = geocoder.osm('Nashville, TN' )
-        g.osm
-        return ['lat', 'lng']
 
 
 
