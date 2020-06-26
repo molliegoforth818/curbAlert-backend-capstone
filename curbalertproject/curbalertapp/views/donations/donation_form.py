@@ -32,20 +32,6 @@ class UpdateDonation(forms.ModelForm):
             initial['category'] = [donation_category.category for donation_category in donation_categories] 
         forms.ModelForm.__init__(self, *args, **kwargs)
 
-    # def save(self, commit=True):
-    #     instance = forms.ModelForm.save(self, False)
-    #     old_save_m2m =self.save_m2m
-    #     def save_m2m():
-    #         old_save_m2m()
-    #         instance.category_set.clear()
-    #         instance.category_set.add(*self.cleaned_data['category'])
-    #     self.save_m2m = save_m2m
-
-    #     if commit:
-    #         instance.save()
-    #         self.save_m2m
-        
-    #     return instance
 
     class Meta:
         model= Donation
@@ -64,7 +50,7 @@ def donation_form(request):
             new_donation = Donation.objects.create(
                 description = form.cleaned_data['description'],
                 expires_on = form.cleaned_data['expires_on'],
-                needs_haul_away =True,
+                needs_haul_away =False,
                 picked_up = False,
                 alerter_id= request.user.id,
                 size_id = form.cleaned_data['size']
@@ -77,7 +63,7 @@ def donation_form(request):
                     category_id = category.id
                 )
                     
-        return redirect(reverse('curbalertapp:donations')) 
+        return redirect(reverse('curbalertapp:home')) 
     else:
         form= DonationForm()
         template = 'donation/donation_form.html'
@@ -95,7 +81,7 @@ def donation_edit_form(request, donation_id):
         if form.is_valid():
             
             form.save()
-        return redirect(reverse('curbalertapp:donations')) 
+        return redirect(reverse('curbalertapp:home')) 
     else: 
         form = UpdateDonation(instance=donation)
         template = 'donation/donation_edit_form.html'
@@ -104,14 +90,3 @@ def donation_edit_form(request, donation_id):
         }
 
         return render(request, template, context)
-
-# @login_required
-# def donation_edit_form_post(request, donation_id):
-#     donation = Donation.objects.get(pk=donation_id)
-#     donation_categories = DonationCategory.objects.filter(pk=donation_id).select_related('category').all()
-#     if request.method == 'POST':
-#         form = UpdateDonation(request.POST, instance=donation)
-#         if form.is_valid():
-            
-#             form.save()
-#         return redirect(reverse('curbalertapp:donations'))
