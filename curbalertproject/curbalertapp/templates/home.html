@@ -19,6 +19,7 @@
 {% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
 <button type="submit">Send a Curb Alert</button>
 </form>
+
 <div>
 Expired Alerts
 <ul>
@@ -26,6 +27,18 @@ Expired Alerts
 {% if donation.is_expired %}
 <li>
  {{donation.user}}: {{donation.description}}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+<div>
+Donations that need pick up
+<ul>
+{% for donation in available_donations %}
+{% if donation.needs_haul_away %}
+<li>
+<a href= '/donation/{{donation.id}}/edit'> {{donation.user}}: {{donation.description}}</a>
 </li>
 {% endif %}
 {% endfor %}
