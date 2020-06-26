@@ -11,8 +11,7 @@ urlpatterns = [
     path('donation/create/', donation_form, name='donation_form'),
     path('donations/', donation_list, name='donations'),
     path('donation/<int:donation_id>/', donation_details, name='donation'),
-    path('donation/<int:donation_id>/edit/', donation_edit_form, name='donation_edit_form'),
-    # path('donation/<int:donation_id>/edit/', donation_edit_form_post, name='donation_edit_form_post')
+    path('donation/<int:donation_id>/edit/', donation_edit_form, name='donation_edit_form')
 
 
 

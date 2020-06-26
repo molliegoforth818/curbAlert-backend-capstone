@@ -7,8 +7,8 @@ from .category import Category
 
 class DonationCategory(models.Model):
     
-    donation = models.ForeignKey(Donation, on_delete = models.CASCADE )
-    category = models.ForeignKey(Category, on_delete = models.CASCADE )
+    donation = models.ForeignKey(Donation, on_delete = models.CASCADE,related_name='donationcategory' )
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name='donationcategory' )
    
     class Meta:
         verbose_name = ("Category")
