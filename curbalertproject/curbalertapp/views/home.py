@@ -6,17 +6,25 @@ from curbalertapp.models import Donation, Alerter
 @login_required
 def home(request):
     if request.method == 'GET':
-        available_donation_queryset = Donation.objects.select_related("alerter").filter(picked_up=False)
         available_donations = []
-        all_donations = available_donation_queryset
-        for donation in available_donation_queryset:
+        user_can_haul_away = Alerter.objects.select_related("user").get(user=request.user).can_haul_away
+        donations_that_are_not_mine_and_need_pick_up=Donation.objects.select_related("alerter").exclude(alerter=request.user.id).filter(picked_up=False)
+        my_donations = Donation.objects.select_related("alerter").filter(alerter=request.user.id)       
+        for donation in donations_that_are_not_mine_and_need_pick_up:
             available_donations.append({
-                'id':donation.id,'description': donation.description, 'latitude': donation.alerter.latitude, 'longitude': donation.alerter.longitude, 'is_expired':donation.is_expired, 'user':donation.alerter.user.username, 'needs_haul_away': donation.needs_haul_away, 'can_haul_away': donation.alerter.can_haul_away
+                'id':donation.id,
+                'description': donation.description, 
+                'latitude': donation.alerter.latitude, 
+                'longitude': donation.alerter.longitude, 
+                'is_expired':donation.is_expired, 
+                'user':donation.alerter.user.username, 
+                'needs_haul_away': donation.needs_haul_away, 
             })        
         template = 'home.html'
         context = {
-            'available_donations':available_donations,
-            'all_donations': all_donations
+            'my_donations': my_donations,
+            'available_donations': available_donations,
+            'user_can_haul_away': user_can_haul_away
 
         }
         return render(request, template, context)

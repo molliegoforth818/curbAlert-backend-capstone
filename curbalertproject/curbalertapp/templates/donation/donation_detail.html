@@ -10,8 +10,8 @@
         <div>
         Category: 
         <ul>
-        {% for category in categories %}
-            <li>{{category.category_title}}</li>
+        {% for category in donation.categories.all %}
+            <li>{{category.title}}</li>
         {% endfor %}
         </ul>
         <div>
@@ -20,15 +20,25 @@
         <div>
         Expires on: {{donation.expires_on}}
         </div>
-        <div>
-        Does this donation need to be picked up? {% if donation.needs_haul_away %}Yes
-        {% else %} No
+        {% if user_can_haul_away %}
+            <div>
+                <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
+                    {{form}}
+                    {% csrf_token %}
+                    <input type="hidden" name="actual_method" value="PUT">
+                    <button>Save Change</button>
+                </form>
+            </div>
         {% endif %}
+        <div>
+            Does this donation need to be picked up? {% if donation.needs_haul_away %}Yes
+            {% else %} No
+            {% endif %}
         </div>
         <div>
-        Has this donation been picked up? {% if donation.picked_up %}Yes
-        {% else %} No
-        {% endif %}
+            Has this donation been picked up? {% if donation.picked_up %}Yes
+            {% else %} No
+            {% endif %}
         </div>
     </section>
 {% if enable_edit%}
@@ -39,6 +49,7 @@
     </form>
     <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
         {% csrf_token %}
+        <input type="hidden" name="actual_method" value="POST">
         <button>Edit</button>
     </form>
 {% endif %}

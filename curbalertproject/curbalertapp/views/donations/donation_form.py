@@ -71,15 +71,18 @@ def donation_form(request):
 @login_required
 def donation_edit_form(request, donation_id):
     donation = Donation.objects.get(pk=donation_id)
-    donation_categories = DonationCategory.objects.filter(pk=donation_id).select_related('category').all()
     if request.method == 'POST':
         form = UpdateDonation(request.POST, instance=donation)
         if form.is_valid():
             form.save()
+            all_donation_categories = DonationCategory.objects.filter(donation=donation).all()
+            for donation_category in all_donation_categories:
+                donation_category.delete()
             for category in form.cleaned_data['categories']:
                 donation_category, created = DonationCategory.objects.get_or_create(donation=donation, category=category)
             
         return redirect(reverse('curbalertapp:home')) 
+    
     else: 
         form = UpdateDonation(instance=donation)
         template = 'donation/donation_edit_form.html'

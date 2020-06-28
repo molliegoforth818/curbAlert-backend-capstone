@@ -1,0 +1,49 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>My Active Curb Alerts</h1>
+    <form action="{% url 'curbalertapp:donation_form'%}" method="GET">
+{% csrf_token %}
+<button type="submit">Create a new Curb Alert</button>
+</form>
+    {% if not active_curb_alerts %}
+    <div>
+    You don't have any Curb Alerts yet.
+    </div>
+    {% endif %}
+    <ul>
+        {% for donation in active_curb_alerts%}
+            <li>
+                {{donation.description}}
+            </li>
+
+<form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE">
+        <button>Delete</button>
+    </form>
+    <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
+            {% endfor %}
+    </ul>
+    <h1>My Expired Curb Alerts</h1>
+    <ul>
+        {% for donation in expired_curb_alerts%}
+            <li>
+                {{donation.description}}
+            </li>
+
+<form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE">
+        <button>Delete</button>
+    </form>
+    <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
+            {% endfor %}
+    </ul>
+{% endblock %}

@@ -20,29 +20,24 @@
 {% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
 <button type="submit">Send a Curb Alert</button>
 </form>
-
-<div>
-Expired Alerts
-<ul>
-{% for donation in available_donations %}
-{% if donation.is_expired %}
-<li>
- {{donation.user}}: {{donation.description}}
-</li>
-{% endif %}
-{% endfor %}
-</ul>
-</div>
-<div>
-Donations that need pick up
-<ul>
-{% for donation in available_donations %}
-{% if donation.can_haul_away %}
-<li>
-{{donation.user}}: {{donation.description}} 
-</li>
-{% endif %}
-{% endfor %}
-</ul>
-</div>
+{% if user_can_haul_away %}
+{% if available_donations %}
+    <div>
+    Curb Alerts that need pick up
+    <ul>
+    {% for donation in available_donations %}
+    {% if donation.needs_haul_away %}
+    <li>
+        <a href="{% url 'curbalertapp:donation' donation.id %}">{{donation.user}}: {{donation.description}}</a> 
+    </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+    <div>
+    No Curb Alerts to be picked up at this time. 
+    </div>
+    {% endif %}
+    {% endif %}
 {% endblock %}

@@ -9,13 +9,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('logout/', logout_user, name='logout'),
     path('donation/create/', donation_form, name='donation_form'),
-    path('donations/', donation_list, name='donations'),
+    path('mycurbalerts/', my_curb_alerts, name='my_curb_alerts'),
     path('donation/<int:donation_id>/', donation_details, name='donation'),
     path('donation/<int:donation_id>/edit/', donation_edit_form, name='donation_edit_form'),
-    path('donation/<int:donation_id>/test_edit/', test_donation_edit_form, name='test_donation_edit_form')
-
-
-
 ]
 
 
