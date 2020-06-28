@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from curbalertapp.models import Alerter
-from django.forms import ValidationError 
+from django.forms import ValidationError
 import geocoder
 
 def register(request):

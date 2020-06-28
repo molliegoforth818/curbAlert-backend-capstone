@@ -8,13 +8,15 @@ def home(request):
     if request.method == 'GET':
         available_donation_queryset = Donation.objects.select_related("alerter").filter(picked_up=False)
         available_donations = []
+        all_donations = available_donation_queryset
         for donation in available_donation_queryset:
             available_donations.append({
                 'id':donation.id,'description': donation.description, 'latitude': donation.alerter.latitude, 'longitude': donation.alerter.longitude, 'is_expired':donation.is_expired, 'user':donation.alerter.user.username, 'needs_haul_away': donation.needs_haul_away, 'can_haul_away': donation.alerter.can_haul_away
             })        
         template = 'home.html'
         context = {
-            'available_donations':available_donations
+            'available_donations':available_donations,
+            'all_donations': all_donations
 
         }
         return render(request, template, context)

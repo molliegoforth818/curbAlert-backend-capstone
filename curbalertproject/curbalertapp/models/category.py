@@ -4,8 +4,14 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    
-    title = models.CharField(null = False, max_length = 55)
+    CHOICES = (
+        ("housewares","Housewares"),
+        ("sporting_goods","Sporting Goods"),
+        ("clothes","Clothes"),
+        ("furniture", "Furniture"),
+        ("miscellaneous", "Miscellaneous"),
+    )
+    title = models.CharField(null = False, max_length = 55, choices=CHOICES)
     
     class Meta:
         verbose_name = ("Category")

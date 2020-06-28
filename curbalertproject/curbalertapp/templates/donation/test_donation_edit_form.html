@@ -1,0 +1,11 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    <h1>Method: {{ method }}</h1>
+    <form action="{% url 'curbalertapp:test_donation_edit_form donation.id' %}" method="post" novalidate>
+        Form Goes Here:
+        {{ donation.description }}
+        {% csrf_token %}
+        <input type="hidden" name="donation_id" value={{ donation.id }}>
+        <input type="submit" value="Submit">
+    </form>
+ {% endblock %}
