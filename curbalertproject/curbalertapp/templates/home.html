@@ -5,8 +5,8 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
-
-
+{{available_donations|json_script:'available_donations'}}
+<script id='available_donations' type='application/json'>{{available_donations}} </script>
 <script src = "{% static 'scripts/map.js' %}"></script>
 
 
@@ -20,5 +20,24 @@
 {% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
 <button type="submit">Send a Curb Alert</button>
 </form>
-
+{% if user_can_haul_away %}
+{% if available_donations %}
+    <div>
+    Curb Alerts that need pick up
+    <ul>
+    {% for donation in available_donations %}
+    {% if donation.needs_haul_away %}
+    <li>
+        <a href="{% url 'curbalertapp:donation' donation.id %}">{{donation.user}}: {{donation.description}}</a> 
+    </li>
+    {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+    <div>
+    No Curb Alerts to be picked up at this time. 
+    </div>
+    {% endif %}
+    {% endif %}
 {% endblock %}

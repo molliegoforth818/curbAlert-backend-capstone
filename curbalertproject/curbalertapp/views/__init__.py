@@ -6,4 +6,5 @@ from .donations.donation_form import donation_form
 from .donations.donation_list import donation_list
 from .donations.donation_form import donation_edit_form
 from .donations.donation_detail import donation_details
+from .donations.my_curb_alerts import my_curb_alerts
 

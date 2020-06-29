@@ -4,15 +4,17 @@ from django.urls import reverse
 
 
 class Size(models.Model):
-    
-    title = models.CharField(null = False, max_length = 55)
+    CHOICES = (
+     ('1','Small'),('2','Medium'),('3','Large')
+    )
+    title = models.CharField(null = False, max_length = 55, choices=CHOICES)
     
     class Meta:
         verbose_name = ("Size")
         verbose_name_plural = ("Sizes")        
         
     def __str__(self):
-        return f"Name: {self.name}"
+        return self.title
     
     def get_absolute_url(self):
         return reverse("Size_detail", kwargs={"pk": self.pk})

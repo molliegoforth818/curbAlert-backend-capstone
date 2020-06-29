@@ -12,7 +12,7 @@ body {
   .navList {
     list-style-type: none;
     display: flex;
-    border: 1px solid lightgray;
+    border: 1px solid mediumspringgreen;
     padding: 1em;
     margin: 0;
   }
