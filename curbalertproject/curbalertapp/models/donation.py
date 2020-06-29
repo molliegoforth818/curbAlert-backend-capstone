@@ -22,4 +22,4 @@ class Donation(models.Model):
         verbose_name_plural = ("Donations")        
     @property
     def is_expired(self):
-        return datetime.strptime(self.expires_on, '%Y-%m-%d').date() < datetime.today().date()
+        return datetime.strptime(self.expires_on, '%Y-%m-%d').date() < datetime.today().date()     #get a string convert it to a datetime and get the date from the datetime 

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 def my_curb_alerts(request):
     if request.method == 'GET':
         
-        my_curb_alerts = Donation.objects.filter(alerter=request.user.id)
+        my_curb_alerts = Donation.objects.filter(alerter=request.user.id)     #getting all the donations associated with the user including active & expired curb alerts 
         active_curb_alerts = []
         expired_curb_alerts = []
         for curb_alert in my_curb_alerts:

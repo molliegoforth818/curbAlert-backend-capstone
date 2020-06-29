@@ -7,7 +7,7 @@ class Category(models.Model):
     CHOICES = (
         ("housewares","Housewares"),
         ("sporting_goods","Sporting Goods"),
-        ("clothes","Clothes"),
+        ("clothes","Clothes"),                                  #set options for categories to use in model forms 
         ("furniture", "Furniture"),
         ("miscellaneous", "Miscellaneous"),
     )
