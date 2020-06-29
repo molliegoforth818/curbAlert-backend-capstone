@@ -12,7 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     address = forms.CharField(max_length=255)
-    can_haul_away = forms.BooleanField(initial=True)
+    can_haul_away = forms.BooleanField(initial=True, required=False, label='Would you like to be available to haul away donations?')
 
     class Meta:
         model = User

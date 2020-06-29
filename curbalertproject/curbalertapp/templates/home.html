@@ -26,10 +26,12 @@
     Curb Alerts that need pick up
     <ul>
     {% for donation in available_donations %}
-    {% if donation.needs_haul_away %}
+    {% if donation.needs_haul_away%}
+    {% if donation.is_expired %}
     <li>
         <a href="{% url 'curbalertapp:donation' donation.id %}">{{donation.user}}: {{donation.description}}</a> 
     </li>
+    {% endif %}
     {% endif %}
     {% endfor %}
     </ul>
