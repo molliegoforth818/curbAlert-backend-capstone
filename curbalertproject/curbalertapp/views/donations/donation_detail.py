@@ -6,10 +6,10 @@ from curbalertapp.models import Donation, DonationCategory, Alerter
 from django import forms
 
 class UpdateDonationPickedUp(forms.ModelForm):
-    picked_up = forms.BooleanField(initial=False, required=False)  #this form shows when a user wants to select that a Curb Alert has been picked up ad taken to a donation center
+    picked_up = forms.BooleanField(initial=False, required=False)  
 
     class Meta:
-        model= Donation                 #only one field b/c i dont want other users to be able to edit part of a donation that isn't theirs
+        model= Donation                
         fields= ('picked_up',)
 
 def get_donation(donation_id):
@@ -63,4 +63,3 @@ def donation_details(request, donation_id):
             donation.delete()
 
             return redirect(reverse('curbalertapp:my_curb_alerts'))
-

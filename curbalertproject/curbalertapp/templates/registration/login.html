@@ -2,7 +2,8 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Login</button>
-    <a href="{% url 'curbalertapp:register' %}">Create Account</a> 
+    <button type="submit" class="btn btn-outline-secondary">Login</button>
+    <a href="{% url 'curbalertapp:register' %}"><button type="button" class="btn btn-outline-dark">Create New Account</button></a>
+
 
  </form>

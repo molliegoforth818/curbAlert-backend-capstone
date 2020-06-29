@@ -18,7 +18,9 @@
 {% csrf_token %}
 {% leaflet_map "myalertmap" callback="map_init" %} 
 {% comment %} initializes map then calls function in js file to run functions to display markers {% endcomment %}
-<button type="submit">Send a Curb Alert</button>
+<button type="submit" class="btn btn-outline-dark">Send a Curb Alert</button>
+
+
 </form>
 {% if user_can_haul_away %}
 {% if available_donations %}
@@ -29,7 +31,8 @@
     {% if donation.needs_haul_away%}
     {% if donation.is_expired %}
     <li>
-        <a href="{% url 'curbalertapp:donation' donation.id %}">{{donation.user}}: {{donation.description}}</a> 
+        <a href="{% url 'curbalertapp:donation' donation.id %}"><button type="button" class="btn btn-outline-secondary">{{donation.user}}: {{donation.description}}</button></a>
+ 
     </li>
     {% endif %}
     {% endif %}

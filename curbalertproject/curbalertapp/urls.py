@@ -11,6 +11,7 @@ urlpatterns = [
     path('donation/create/', donation_form, name='donation_form'),
     path('mycurbalerts/', my_curb_alerts, name='my_curb_alerts'),
     path('donation/<int:donation_id>/', donation_details, name='donation'),
+    path('donation/detail/<int:donation_id>/', donation_detail_for_map, name='donation_detail_for_map'),
     path('donation/<int:donation_id>/edit/', donation_edit_form, name='donation_edit_form'),
 ]
 

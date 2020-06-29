@@ -1,0 +1,35 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <section id="donation-details">
+        <h1>Donation</h1>
+        <h2>Alerter: {{ donation.alerter.user }}</h2>
+        <div>
+        Size of Donation: {{donation.size}}
+        </div>
+        <div>
+        Category: 
+        <ul>
+        {% for category in donation.categories.all %}
+            <li>{{category.title}}</li>
+        {% endfor %}
+        </ul>
+        <div>
+        Description: {{donation.description}}
+        </div>
+        <div>
+        Expires on: {{donation.expires_on}}
+        </div>
+        <div>
+            Does this donation need to be picked up? {% if donation.needs_haul_away %}Yes
+            {% else %} No
+            {% endif %}
+        </div>
+        <div>
+            Has this donation been picked up? {% if donation.picked_up %}Yes
+            {% else %} No
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
