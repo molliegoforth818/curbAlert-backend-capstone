@@ -6,42 +6,58 @@ from django.contrib.auth import authenticate, login
 from curbalertapp.models import Alerter
 from django.forms import ValidationError
 import geocoder
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    address = forms.CharField(max_length=255)
+    can_haul_away = forms.BooleanField(initial=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', 'address', 'can_haul_away',)
+
+
+def __init__(self,*args,**kwargs):
+    super(RegisterForm, self).__init__(*args,**kwargs)
+
 
 def register(request):
     if request.method == 'POST':
-        form_data = request.POST
-        
-        try:
-            if form_data['password'] != form_data['password_confirmation']:
-                raise ValidationError("Password and password confirmation do not match.")
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+
+            lat_long_from_address = geocoder.osm(form.cleaned_data['address']).json
             
-            new_user = User.objects.create_user(
-                username=form_data['username'],
-                password=form_data['password'],
-                email=form_data['email']
-            )
+            address = form.cleaned_data['address']
+            latitude = lat_long_from_address['lat']
+            longitude = lat_long_from_address['lng']
+            can_haul_away = form.cleaned_data['can_haul_away']
             
-            lat_long_from_address = geocoder.osm(form_data['address']).json
-            new_user.alerter.address=form_data['address']
-            new_user.alerter.latitude = lat_long_from_address['lat']
-            new_user.alerter.longitude = lat_long_from_address['lng']
-            new_user.alerter.can_haul_away=False
-            new_user.alerter.save()
-            
-            
-            
-            user = authenticate(request, username=form_data['username'], password=form_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect(reverse('curbalertapp:home'))
-        except Exception as e:
-            messages.error(request, f'{type(e)}: {e}')
-          
-                
+            user.alerter.address = address
+            user.alerter.latitude = latitude
+            user.alerter.longitude = longitude
+            user.alerter.can_haul_away = can_haul_away
+            user.save()
+
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+
+            login(request, user)
+            return redirect(reverse('curbalertapp:home'))
+    else:
+        form = RegisterForm()            
     template = 'registration/register.html'
-    context = {}
+    context = {
+        'form':form
+    }
 
     return render(request, template,context)
+
+
+
 
 
 

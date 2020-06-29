@@ -10,37 +10,9 @@
         </ul>
     {% endif %}
 
-    <form action="{% url 'curbalertapp:register' %}" method="post">
+    <form action="{% url 'curbalertapp:register' %}" method="post" novalidate>
       {% csrf_token %} 
-      <fieldset>
-          <label for="username">Username: </label>
-          <input id="username" type="text" name="username">
-      </fieldset>
-      <fieldset>
-          <label for="password">Password: </label>
-          <input id="password" type="password" name="password">
-      </fieldset>
-            <fieldset>
-          <label for="password_confirmation">Password Confirmation: </label>
-          <input id="password_confirmation" type="password" name="password_confirmation">
-      </fieldset>
-    <fieldset>
-          <label for="email">Email: </label>
-          <input id="email" type="email" name="email">
-      </fieldset>
-      <fieldset>
-          <label for="address">Address: </label>
-          <input id="address" type="address" name="address">
-      </fieldset>
-      <fieldset>
-          <label for="can_haul_away">Are you available to haul away donations? </label>
-          <select id="can_haul_away" name="can_haul_away">
-          <option value=true>Yes</option>
-          <option value=false>No</option>
-          </select>
-      </fieldset>
-        <fieldset>
+      {{form.as_p}}
       <input type="submit" value="Submit" />
-      </fieldset>
     </form>
 {% endblock %} 
