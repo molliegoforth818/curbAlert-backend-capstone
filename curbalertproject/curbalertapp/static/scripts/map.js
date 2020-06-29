@@ -3,7 +3,7 @@ var available_donations = JSON.parse(document.getElementById('available_donation
 function map_init(map,options){
     available_donations.forEach(donation => {
         marker= L.marker([donation.latitude, donation.longitude]).addTo(map);
-        marker.bindPopup(`Description: ${donation.description}</br><a href=/donation/${donation.id}>Go to Donation</a>`);
+        marker.bindPopup(`Description: ${donation.description}</br><a href=/donation/detail/>${donation.id}> Go to Donation</a>`);
  
     }); 
    }
