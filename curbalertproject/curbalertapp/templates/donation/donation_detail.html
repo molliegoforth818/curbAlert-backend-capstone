@@ -26,9 +26,7 @@
                     {{form}}
                     {% csrf_token %}
                     <input type="hidden" name="actual_method" value="PUT">
-               <button type="button" class="btn btn-outline-secondary">Save Change</button>
-
-
+                    <button>Save Change</button>
                 </form>
             </div>
         {% endif %}
@@ -47,12 +45,12 @@
     <form action="{% url 'curbalertapp:donation' donation.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="DELETE">
-<button type="button" class="btn btn-outline-secondary">Delete</button>
+        <button>Delete</button>
     </form>
     <form action="{% url 'curbalertapp:donation_edit_form' donation.id %}" method="GET">
         {% csrf_token %}
         <input type="hidden" name="actual_method" value="POST">
-       <button type="button" class="btn btn-outline-secondary">Edit</button>
+        <button>Edit</button>
     </form>
 {% endif %}
 {% endblock %}
