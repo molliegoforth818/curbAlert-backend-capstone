@@ -76,7 +76,7 @@ def donation_edit_form(request, donation_id):
         if form.is_valid():
             form.save()
             all_donation_categories = DonationCategory.objects.filter(donation=donation).all() 
-            for donation_category in all_donation_categories:                        #delete every DonationCategory that is associated with the donation 
+            for donation_category in all_donation_categories:                 #delete every DonationCategory that is associated with the donation 
                 donation_category.delete()
             for category in form.cleaned_data['categories']:         #creating join between donation and category by creating a DonationCategory for each category selected
                 donation_category, created = DonationCategory.objects.get_or_create(donation=donation, category=category)
