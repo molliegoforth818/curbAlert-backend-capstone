@@ -15,7 +15,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-(file:///Users/molliegoforth/Desktop/CurbAlertScreenshot.png)
+![ScreenShot] (file:///Users/molliegoforth/Desktop/CurbAlertScreenshot.png)
 
 ### Built With
 
