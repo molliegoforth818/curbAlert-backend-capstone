@@ -15,7 +15,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![ScreenShot] (file:///Users/molliegoforth/Desktop/CurbAlertScreenshot.png)
+![image](https://user-images.githubusercontent.com/59578794/90427427-23432b00-e088-11ea-8a3e-67b3eb2cc357.png)
 
 ### Built With
 
@@ -88,7 +88,7 @@ Expiration of Curb Alert
 
 Email: molliegoforth818@gmail.com
 
-Project Link: [https://github.com/molliegoforth818/repo]
+Project Link: [https://github.com/molliegoforth818/curbAlert-backend-capstone]
 
 
 
