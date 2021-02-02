@@ -45,18 +45,18 @@ brew install python3
 ```sh
 git clone https://github.com/molliegoforth818/curbAlert-backend-capstone
 ```
-2.```sh cd ```into directory with ```sh manage.py```
+2.``` cd ```into directory with ``` manage.py```
 
 3. Activate the virtual environment
-```sh
+```
 source ./curbalertEnv/bin/activate
 ```
 4. install dependencies:
-```sh
+```
 pip install -r requirements.txt
 ```
 5. Run the server
-```sh
+```
 python manage.py runserver
 ```
 
