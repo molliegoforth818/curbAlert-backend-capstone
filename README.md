@@ -49,7 +49,7 @@ git clone https://github.com/molliegoforth818/curbAlert-backend-capstone
 
 3. Activate the virtual environment
 ```
-source ./curbalertEnv/bin/activate
+ source ./curbalert-env/bin/activate
 ```
 4. install dependencies:
 ```
