@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -132,3 +133,5 @@ LEAFLET_CONFIG= {
     'MIN_ZOOM': 1,
     'MAX_ZOOM': 20,
 }
+# Activate Django-Heroku.
+django_heroku.settings(locals())
