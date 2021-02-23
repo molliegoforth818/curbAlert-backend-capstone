@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kp=$t23$e)qmk&vnlgrc4wbspj(v-t+n@8u&*h0@izudsbcasp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['curb-alerter.herokuapp.com','127.0.0.1']
 
 
 # Application definition
