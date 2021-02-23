@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -127,6 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 LEAFLET_CONFIG= {  
@@ -135,3 +137,5 @@ LEAFLET_CONFIG= {
     'MIN_ZOOM': 1,
     'MAX_ZOOM': 20,
 }
+# Activate Django-Heroku.
+django_heroku.settings(locals())
